@@ -65,7 +65,7 @@ Eigen::MatrixXd getDataFromFile(const std::string& filename){
 int main(int argc, char* argv[])
 {
     int clusters{3};
-    
-
+    Eigen::MatrixXd data = getDataFromFile("datasets/clustering-S/s1.txt");
+    std::cout << data.rows() << ", " << data.cols() << std::endl;
     return 0;
 }
