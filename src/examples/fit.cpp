@@ -4,18 +4,6 @@
 #include "kmeans.hpp"
 
 
-void writeEigenMatrixToFile(Eigen::MatrixXd const data, std::string filename){
-    std::ofstream file(filename);
-    if (file){
-        for (size_t i{0}; i < data.rows(); i++){
-            for (size_t j{0}; j < data.cols(); j++){
-                file << data.row(i)[j] << "\n";
-            }
-        }
-        file.close();
-    }
-}
-
 void writeEigenVectorToFile(Eigen::VectorXi const data, std::string filename){
     std::ofstream file(filename);
     if (file){
@@ -62,11 +50,13 @@ Eigen::MatrixXd getDataFromFile(const std::string& filename){
     return data;
 }
 
+
 int main(int argc, char* argv[])
 {
-    int clusters{3};
+    int clusters{15};
     Eigen::MatrixXd data = getDataFromFile("datasets/clustering-S/s1.txt");
     KMeans kmeans(clusters, data); 
     kmeans.fit(data);
+    writeEigenVectorToFile(kmeans.getLabels(), "labels.txt");
     return 0;
 }

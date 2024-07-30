@@ -59,14 +59,22 @@ Eigen::MatrixXd KMeans::gravityCenter(const Eigen::MatrixXd points) const {
 }
 
 bool KMeans::endOfIteration(const Eigen::MatrixXd oldCentroids, const Eigen::MatrixXd newCentroids) const {
+    for (size_t i{0}; i < oldCentroids.rows(); i++){
+        if ((oldCentroids.row(i) - newCentroids.row(i)).norm() < 0.01)
+            return false;
+    }
     return true;
 }
 
 void KMeans::fit(const Eigen::MatrixXd data)
 {
     _labels = Eigen::VectorXi::Zero(data.rows());
-    for (size_t n{0}; n < 5; n++){
+    Eigen::MatrixXd oldCentroids = getCentroids();
+    do
+    {
         updateLabels(data);
+        oldCentroids = getCentroids();
         updateCentroids(data);
-    }
+    } while (endOfIteration(oldCentroids, getCentroids()));
+   
 }
