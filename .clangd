@@ -1,0 +1,34 @@
+CompileFlags:
+  Add:
+    - -I/home/bbosc/Repositories/ML-cpp/include/
+    - -I/home/bbosc/Repositories/ML-cpp/include/eigen/
+    - -std=c++17                    # Set the C++ standard version
+    - -Wall                         # Enable all warnings
+    - -g                            # Include debug information (for debugging)
+    - -DDEBUG                       # Define the DEBUG macro
+    - -O2                           # Optimization level (e.g., O2 for optimization)
+    - -DANOTHER_MACRO=42            # Define a macro with a value
+    - -fPIC                         # Position-independent code flag (if needed for shared libraries)
+
+# Path to the compile_commands.json file (if using CMake or another build system)
+CompilationDatabase: build
+
+# If you're not using compile_commands.json and instead manually specify individual files, 
+# you can use the following:
+# CompilationDatabase: /path/to/project
+
+# Set the C++ language standard globally (this can also be done in CompileFlags above, but here it's set globally for clarity)
+Clangd:
+  CheckUpdates: true  # Whether to automatically check for clangd updates
+
+# Set a project-specific configuration for Clangd
+# ProjectRoot: /path/to/project
+
+# If you have additional settings for Clangd or other options, you can specify them here
+Diagnostics:
+  ClangTidyChecks: "*,-clang-analyzer-*,-cppcoreguidelines-*"
+
+# Enable/Disable specific features for the language server
+Feature:
+  - Index
+
